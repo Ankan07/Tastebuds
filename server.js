@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 
 var a=require('lodash');
 mongoose.Promise=global.Promise;
-mongoose.connect('mongodb://localhost:27017/Food')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Food')
 const port=process.env.PORT || 3000;
 var Groups= new mongoose.Schema({
 
@@ -180,40 +180,40 @@ app.post('restaurants/edit/:id',(req,res)=>{
 // Restaurant.find({price:450}).then((restaurant)=>{restaurant.price=349;
 // restaurant.save();
 //  }).catch((e)=>{console.log(e);});
-Restaurant.find({h:{
-a:{$in:[12]}}).then((restaurant)=>{
-
-console.log(restaurant);
-
-
-})
-Restaurant.aggregate([{ $addFields:{nonvegt:"yes" }},{$out:"Restaurant"}]);
-
-app.get('/me',(req,res)=>{
-
-
-
-
-
-   Restaurant.find({}).then((restaurant)=>{
-
-var big=restaurant.h;
-var bug=big.a;
-bug.push("kiwi",12,{pride:23});
-restaurant.save();
-res.send(restaurant);
-
-
-
-
-
-}).catch((e)=>{
-  console.log(e);
-   });
-  //  res.send(restaurant);
-     // Restaurant.findOne({rid:food.rid}).then((restaurant)=>{
-     //   console.log(restaurant.name);
-     })
+// Restaurant.find({h:{
+// a:{$in:[12]}}).then((restaurant)=>{
+//
+// console.log(restaurant);
+//
+//
+// })
+// Restaurant.aggregate([{ $addFields:{nonvegt:"yes" }},{$out:"Restaurant"}]);
+//
+// app.get('/me',(req,res)=>{
+//
+//
+//
+//
+//
+//    Restaurant.find({}).then((restaurant)=>{
+//
+// var big=restaurant.h;
+// var bug=big.a;
+// bug.push("kiwi",12,{pride:23});
+// restaurant.save();
+// res.send(restaurant);
+//
+//
+//
+//
+//
+// }).catch((e)=>{
+//   console.log(e);
+//    });
+//   //  res.send(restaurant);
+//      // Restaurant.findOne({rid:food.rid}).then((restaurant)=>{
+//      //   console.log(restaurant.name);
+//      })
 
 
 
